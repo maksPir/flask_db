@@ -1,0 +1,19 @@
+services:
+  mariadbb:
+      image: mariadb
+      restart: always
+      ports:
+        - "4321:3306"
+      env_file:
+      - .env
+  web:
+  
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/code
+    depends_on:
+      - mariadbb
+    env_file:
+      - .env
